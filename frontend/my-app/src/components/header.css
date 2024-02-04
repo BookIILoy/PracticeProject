@@ -25,6 +25,7 @@
 
 .menu {
     display: flex;
+    justify-content: space-between;
     list-style-type: none;
 }
 
@@ -40,6 +41,10 @@
 .mobile-menu {
     display: none;
 
+}
+
+.header-profile {
+    color: #fff;
 }
 
 @media screen and (max-width: 1080px){

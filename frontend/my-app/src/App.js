@@ -1,4 +1,4 @@
-import Header from "./components/header"
+
 import Login from "./components/login";
 import Cart from "./components/cart";
 import About from "./components/about";
@@ -7,7 +7,6 @@ import { Route, Routes } from "react-router-dom"
 function App() {
   return (
     <>
-      <Header />
       <Routes>
           <Route path="/" element = {<Home />} />
           <Route path="/about" element = {<About />} />

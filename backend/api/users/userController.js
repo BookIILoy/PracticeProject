@@ -4,7 +4,7 @@ const {
     getUserByUserId,
     getUsers,
     updateUser,
-    deleteUser
+    deleteUser,
   } = require("./userService");
   const { hashSync, genSaltSync } = require("bcrypt");
   const bcrypt = require("bcrypt");
@@ -131,6 +131,7 @@ const {
           return;
         }
         if (!results) {
+          console.log("getUserByUserId")
           return res.json({
             success: 0,
             message: "Record not Found"
@@ -178,6 +179,7 @@ const {
           return;
         }
         if (results) {
+          console.log("delete")
           return res.json({
             success: 0,
             message: "Record Not Found"

@@ -1,19 +1,18 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { FiCode, FiX, FiMenu } from "react-icons/fi"
 import './header.css'
-import { CgProfile } from "react-icons/cg";
 
-function Header({user, isLogin}) {
-    const [click, setClick] = useState(false)
-    const handleClick = () => setClick(!click)
-    const closeMobileMenu = () => setClick(false)
+function LoginHeader() {
+    const [click, setClick] = useState(false);
+    const handleClick = () => setClick(!click);
+    const closeMobileMenu = () => setClick(false);
     const navigate = useNavigate();
     const handleSubmitCart = () => {
         navigate('/cart')
     }
     const handleSubmitLogin = () => {
-        navigate('/login')
+        navigate('/')
     }
     const handleSubmitShop = () => {
         navigate('/shop')
@@ -33,11 +32,7 @@ function Header({user, isLogin}) {
                             <Link to = '/cart' onSubmit={handleSubmitCart}>Cart</Link>
                         </li> 
                         <li className="menu-link" onClick={closeMobileMenu}>
-                            {isLogin ? (
-                                <Link to = '/login' className="header-profile" onSubmit={handleSubmitLogin}><CgProfile />{user.user.firstname}</Link>
-                            ) :
-                            <Link to = '/login' onSubmit={handleSubmitLogin}>Login/Register</Link>
-                        }
+                            <Link to = '/' onSubmit={handleSubmitLogin}></Link>
                         </li>
                     </ul>
                     <div className="mobile-menu" onClick={handleClick}>
@@ -54,4 +49,4 @@ function Header({user, isLogin}) {
     )
 }
 
-export default Header
+export default LoginHeader
