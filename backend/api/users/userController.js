@@ -6,7 +6,7 @@ const {
     updateUser,
     deleteUser
   } = require("./userService");
-  const { hashSync, genSaltSync, compareSync } = require("bcrypt");
+  const { hashSync, genSaltSync } = require("bcrypt");
   const bcrypt = require("bcrypt");
   const { sign } = require("jsonwebtoken");
 
@@ -51,7 +51,6 @@ const {
             data: "Invalid email or password"
           });
         }
-        console.log(results)
         const isPasswordValid = await verifyPassword(body.password, results.userPassword);
         if (isPasswordValid) {
           const jsontoken = generateToken(results);
