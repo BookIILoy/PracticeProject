@@ -7,9 +7,65 @@
     display: flex;
     justify-content: center;
     align-items: flex;
-    margin-top: auto;
+    background: url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .login-text {
+    margin: 200px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 30px 40px;
+    backdrop-filter: blur(10px);
     text-align: center;
+}
+
+.login-input {
+    background: transparent;
+    backdrop-filter: blur(20px);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.login-btn {
+    border-radius: 20px;
+    width: 90%;
+    height: 50px;
+    font-size: 16px;
+    color: #000000;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+
+@media screen and (min-height : 1000px) and (max-height: 1029px) and (min-width: 400px) {
+    .login-text {
+        margin: 138.5px;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 30px 40px;
+        backdrop-filter: blur(10px);
+        text-align: center;
+    }
+    
+}
+@media screen and (max-height: 1000px) and (min-width: 400px) {
+    .login-text {
+        margin: 76.5px;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 30px 40px;
+        backdrop-filter: blur(10px);
+        text-align: center;
+    }
+    
+}
+@media screen and (max-width: 400px) {
+    .login-text {
+        text-align: center;
+    }
+    
 }

@@ -48,7 +48,7 @@ function Login(){
         .catch(error => console.log('error', error));
     }
     const handleSubmitRegister = () => {
-        navigate("/")
+        navigate("/register")
     }
     return (
         <>
@@ -56,28 +56,30 @@ function Login(){
         <div className="container">
             <div className="login-con">
                 <div className="login-text">
-                    <h2>Login</h2>
-                    <div className="login-input">
-                        <input type="text"
-                            className="login-input"
-                            placeholder="email/username"
-                            required
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)} />
+                    <div className="login-info">
+                        <h2>Login</h2>
+                        <div className="login-input">
+                            <input type="text"
+                                className="login-input"
+                                placeholder="email/username"
+                                required
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)} />
+                        </div>
+                        <div className="login-input">
+                            <input type="password"
+                                className="login-input"
+                                placeholder="password"
+                                required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)} />
+                        </div>
+                        <button type="submit" className="login-btn" onClick={handleSubmitLogin}>Login</button>
+                        <p>
+                        Dont't have an account?
+                        </p>
+                        <button type="submit" className="login-btn" onClick={handleSubmitRegister}>Register</button>
                     </div>
-                    <div className="login-input">
-                        <input type="password"
-                            className="login-input"
-                            placeholder="password"
-                            required
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)} />
-                    </div>
-                    <button type="submit" className="login-btn" onClick={handleSubmitLogin}>Login</button>
-                    <p>
-                       Dont't have an account?
-                    </p>
-                    <button type="submit" className="login-btn" onClick={handleSubmitRegister}>Register</button>
                 </div>
             </div>
         </div>
