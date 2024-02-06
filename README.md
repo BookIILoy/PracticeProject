@@ -2,4 +2,4 @@
 ## Work In Progess
 
 - Create Backend to connect database with RESTAPIs
-- Create Frontend website ( Will connect to backend )
+- Create Frontend website (Login & Register function is funish )
