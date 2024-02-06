@@ -14,7 +14,7 @@
 }
 
 .login-text {
-    margin: 200px;
+    margin: 138.5px;
     border: 2px solid rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     padding: 30px 40px;
@@ -24,7 +24,7 @@
 
 .login-input {
     background: transparent;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(5px);
     color: #fff;
     border-radius: 10px;
     padding: 30px 40px;
@@ -38,6 +38,7 @@
     color: #000000;
     font-weight: 500;
     margin-top: 10px;
+    text-transform: uppercase;
 }
 
 
@@ -47,7 +48,7 @@
         border: 2px solid rgba(0, 0, 0, 0.2);
         border-radius: 10px;
         padding: 30px 40px;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(5px);
         text-align: center;
     }
     
@@ -58,14 +59,77 @@
         border: 2px solid rgba(0, 0, 0, 0.2);
         border-radius: 10px;
         padding: 30px 40px;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(5px);
         text-align: center;
+        color: #fff;
     }
-    
+}
+@media screen and (min-width :426px) 
+{
+    .login-text{
+        color: #fff;
+    }
+    .login-btn {
+        font-weight: bold;
+    }  
+    .login-input {
+        background: transparent;
+        color: #fff;
+    }
+    .login-input input::placeholder {
+        color: #dddddd;
+        font-size: 16px;
+    }  
 }
 @media screen and (max-width: 400px) {
     .login-text {
         text-align: center;
+        color: #fff;
+        backdrop-filter: blur(5px);
+
+    }
+    .login-btn {
+        height: 40px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .login-input {
+        background: transparent;
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px 0px;
+    }
+    .login-input input::placeholder {
+        color: #dddddd;
+        text-align: center;
     }
     
 }
+
+@media screen and (min-width : 401px) and (max-width : 425px){
+    .login-text {
+        width: 300px;
+        margin : 138.5px;
+        text-align: center;
+        color: #fff;
+        backdrop-filter: blur(5px);
+
+    }
+    .login-btn {
+        height: 40px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .login-input {
+        background: transparent;
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px 0px;
+    }
+    .login-input input::placeholder {
+        color: #dddddd;
+        text-align: center;
+    }
+}
+
+

@@ -16,73 +16,105 @@ function Register() {
     const [birth, setBirth] = useState();
     const MySwal = withReactContent(Swal);
     const handleSubmitRegister = (e) => {
-        e.preventDefault();
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJmaXJzdE5hbWUiOiJ0dGVzIiwibGFzdE5hbWUiOiJUZXN0TGFzdCIsInVzZXJFbWFpbCI6InR0MkBtYWlsLmNvbSIsImlhdCI6MTcwNzEwNjY2OSwiZXhwIjoxNzA3MTEwMjY5fQ.duT7lDk6G1SXqqZtiDyLrIM-SbOlP0NTcUrdBNSzAz0");
+            if( phoneNum && firstName && lastName && email && password && rePassword && birth !== ''){
+                e.preventDefault();
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
-        "email": email
-        });
+                var raw = JSON.stringify({
+                "email": email
+                });
+        
+                var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+                };
+        
+                fetch("http://localhost:5000/api/users/email", requestOptions)
+                .then(response => response.json())
+                .then(result => {
+                    if(result.success === 0){
+                        var myHeaders = new Headers();
+                        myHeaders.append("Content-Type", "application/json");
 
-        var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-        };
+                        var raw = JSON.stringify({
+                        "phoneNum": phoneNum
+                        });
 
-        fetch("http://localhost:5000/api/users/email", requestOptions)
-        .then(response => response.json())
-        .then(result => {
-            if(result.success === 0){
-                if(password === rePassword){
-                    var myHeaders = new Headers();
-                    myHeaders.append("Content-Type", "application/json");
-                    myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJmaXJzdE5hbWUiOiJ0dGVzIiwibGFzdE5hbWUiOiJUZXN0TGFzdCIsInVzZXJFbWFpbCI6InR0MkBtYWlsLmNvbSIsImlhdCI6MTcwNzEwNjY2OSwiZXhwIjoxNzA3MTEwMjY5fQ.duT7lDk6G1SXqqZtiDyLrIM-SbOlP0NTcUrdBNSzAz0");
-            
-                    var raw = JSON.stringify({
-                    "firstName": firstName,
-                    "lastName": lastName,
-                    "password": password,
-                    "phoneNum": phoneNum,
-                    "email":email,
-                    "birth": birth
-                    });
-            
-                    var requestOptions = {
-                    method: 'POST',
-                    headers: myHeaders,
-                    body: raw,
-                    redirect: 'follow'
-                    };
-            
-                    fetch("http://localhost:5000/api/users", requestOptions)
-                    .then(response => response.json())
-                    .then(result => {
-                        if(result.success === 1){
-                            MySwal.fire({
-                                html: <i>Resister Successfully.</i>,
-                                icon: 'success'
-                            })
-                            navigate('/login')
-                        }
-                    })
+                        var requestOptions = {
+                        method: 'POST',
+                        headers: myHeaders,
+                        body: raw,
+                        redirect: 'follow'
+                        };
+
+                        fetch("http://localhost:5000/api/users/phone", requestOptions)
+                        .then(response => response.json())
+                        .then(result => {
+                            if(result.success === 0){
+                                if(password === rePassword){
+                                    var myHeaders = new Headers();
+                                    myHeaders.append("Content-Type", "application/json");
+                            
+                                    var raw = JSON.stringify({
+                                    "firstName": firstName,
+                                    "lastName": lastName,
+                                    "password": password,
+                                    "phoneNum": phoneNum,
+                                    "email":email,
+                                    "birth": birth
+                                    });
+                            
+                                    var requestOptions = {
+                                    method: 'POST',
+                                    headers: myHeaders,
+                                    body: raw,
+                                    redirect: 'follow'
+                                    };
+                            
+                                    fetch("http://localhost:5000/api/users", requestOptions)
+                                    .then(response => response.json())
+                                    .then(result => {
+                                        if(result.success === 1){
+                                            MySwal.fire({
+                                                html: <i>Resister Successfully.</i>,
+                                                icon: 'success'
+                                            })
+                                            navigate('/login')
+                                        }
+                                    })
+                                    .catch(error => console.log('error', error));
+                                } else{
+                                    MySwal.fire({
+                                        html : <i>Password Not Match.</i>,
+                                        icon : 'error'
+                                    })
+                                }
+                            } else {
+                                MySwal.fire({
+                                    html: <i>Phone Numer is already used.</i>,
+                                    icon : 'error'
+                                })
+                            }
+                        })
                     .catch(error => console.log('error', error));
-                } else{
-                    MySwal.fire({
-                        html : <i>Password Not Match.</i>,
-                        icon : 'error'
-                    })
-                }
+               }
+                    else {
+                        MySwal.fire({
+                            html: <i>Email is already used.</i>,
+                            icon: 'error'
+                        })
+                    }  
+                })
+                .catch(error => console.log('error', error));
             } else {
                 MySwal.fire({
-                    html: <i>Email is already used.</i>,
+                    html: <i>Informations are missing.</i>,
                     icon: 'error'
-                })
-            }
-        })
-        .catch(error => console.log('error', error));
+                    })
+                }
     }
 
     return (
@@ -125,14 +157,6 @@ function Register() {
                                 onChange={(e) => setPhoneNum(e.target.value)} />
                         </div>
                         <div className="register-input">
-                            <input type="text"
-                                className="register-input"
-                                placeholder="YYYY-MM-DD"
-                                required
-                                value={birth}
-                                onChange={(e) => setBirth(e.target.value)} />
-                        </div>
-                        <div className="register-input">
                             <input type="password"
                                 className="register-input"
                                 placeholder="Password"
@@ -147,6 +171,14 @@ function Register() {
                                 required
                                 value={rePassword}
                                 onChange={(e) => setRePassword(e.target.value)} />
+                        </div>
+                        <div className="register-input">
+                            <input type="text"
+                                className="register-input"
+                                placeholder="YYYY-MM-DD"
+                                required
+                                value={birth}
+                                onChange={(e) => setBirth(e.target.value)} />
                         </div>
                         <button type="submit" className="register-btn" onClick={handleSubmitRegister}>Register</button>
                     </div>

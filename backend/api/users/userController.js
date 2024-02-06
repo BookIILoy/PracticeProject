@@ -5,6 +5,7 @@ const {
     getUsers,
     updateUser,
     deleteUser,
+    getUserByUserPhoneNum
   } = require("./userService");
   const { hashSync, genSaltSync } = require("bcrypt");
   const bcrypt = require("bcrypt");
@@ -113,7 +114,7 @@ const {
         if (!results) {
           return res.json({
             success: 0,
-            data: "Invalid email or password"
+            data: "Invalid email"
           });
         }
         results.password = undefined;
@@ -121,6 +122,19 @@ const {
           success: 1,
           data: results
         });
+      })
+    },
+    getUserByUserPhoneNum: (req, res) => {
+      const body = req.body;
+      getUserByUserPhoneNum(body.phoneNum, (err, results) => {
+        if(err){
+          console.log(err);
+        }
+        results.password = undefined;
+        return res.json({
+          success: 1,
+          data: results
+        })
       })
     },
     getUserByUserId: (req, res) => {

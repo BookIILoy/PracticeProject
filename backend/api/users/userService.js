@@ -33,6 +33,18 @@ module.exports = {
       }
     );
   },
+  getUserByUserPhoneNum: (phoneNum, callBack) => {
+    pool.query(
+      `SELECT * FROM register_users WHERE userPhoneNum = ?`,
+      [phoneNum],
+      (err, results, fields) => {
+        if(err) {
+          callBack(err);
+        }
+        return callBack(null, results[0]);
+      }
+    )
+  },
   getUserByUserId: (id, callBack) => {
     pool.query(
       `SELECT * FROM register_users WHERE userId = ?`,
