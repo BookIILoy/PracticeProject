@@ -6,6 +6,7 @@ import Home from "./components/home";
 import Footer from "./components/footer";
 import Register from "./components/register";
 import { Route, Routes } from "react-router-dom"
+import Profile from "./components/profile";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
           <Route path="/cart" element = {<Cart />} />
           <Route path="/login" element = {<Login />} />
           <Route path="/register" element = {<Register />} />
+          <Route path="/profile" element = {<Profile />} />
       </Routes>
       <Footer />
     </>

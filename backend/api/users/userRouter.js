@@ -20,14 +20,15 @@ const {
   router.post("/email", getUserByUserEmail);
   router.post("/phone", getUserByUserPhoneNum);
   router.get("/auth", checktoken, (req, res) => {
-    const {userId, firstName, lastName, userEmail} = req.user;
+    const {userId, firstName, lastName, userEmail, userPhoneNum} = req.user;
     return res.json({
       success: 1,
       user: {
         user_id : userId,
         firstname : firstName,
         lastname : lastName,
-        email : userEmail
+        email : userEmail,
+        phone : userPhoneNum
       },
     })
   })

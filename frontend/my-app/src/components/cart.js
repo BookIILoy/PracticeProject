@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Header from "./header";
+import { useNavigate } from "react-router-dom";
 
 function Cart(){
+    const navigate = useNavigate();
     const [user, setUser] = useState([]);
     const [isLogin, setIsLogin] = useState(false);
     useEffect(() => {
@@ -26,7 +28,7 @@ function Cart(){
                 console.log(result)
             }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => navigate('/login'));
     },[])
 
     return (

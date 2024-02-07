@@ -18,6 +18,9 @@ function Header({user, isLogin}) {
     const handleSubmitShop = () => {
         navigate('/shop')
     }
+    const handleSubmitProfile = () => {
+        navigate('/profile')
+    }
     return(
         <div className="header">
             <div className="container">
@@ -34,7 +37,7 @@ function Header({user, isLogin}) {
                         </li> 
                         <li className="menu-link" onClick={closeMobileMenu}>
                             {isLogin ? (
-                                <Link to = '/login' className="header-profile" onSubmit={handleSubmitLogin}><CgProfile />{user.user.firstname}</Link>
+                                <Link to = '/profile' className="header-profile" onSubmit={handleSubmitProfile}><CgProfile />{user.user.firstname}</Link>
                             ) : (
                                 <Link to = '/login' onSubmit={handleSubmitLogin}>Login/Register</Link>
                             )

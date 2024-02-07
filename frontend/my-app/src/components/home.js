@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Banner from "./banner";
 import ProductLine from "./productline";
 import Header from "./header";
+import { useNavigate } from "react-router-dom";
 
 function Home () {
+    const navigate = useNavigate();
     const [isLogin, setIsLogin] = useState(false);
     const [user, setUser] = useState([]);
     useEffect(() => {
@@ -28,7 +30,7 @@ function Home () {
                 console.log(result)
             }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => navigate('/'));
     },[])
     //console.log(user, isLogin)
         return (

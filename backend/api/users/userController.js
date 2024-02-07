@@ -130,7 +130,6 @@ const {
         if(err){
           console.log(err);
         }
-        results.password = undefined;
         return res.json({
           success: 1,
           data: results

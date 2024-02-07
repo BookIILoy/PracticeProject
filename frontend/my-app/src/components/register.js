@@ -7,17 +7,18 @@ import './register.css'
 
 function Register() {
     const navigate = useNavigate();
-    const [phoneNum, setPhoneNum] = useState();
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [rePassword, setRePassword] = useState();
-    const [birth, setBirth] = useState();
+    const [phoneNum, setPhoneNum] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [rePassword, setRePassword] = useState('');
+    const [birth, setBirth] = useState('');
     const MySwal = withReactContent(Swal);
     const handleSubmitRegister = (e) => {
             if( phoneNum && firstName && lastName && email && password && rePassword && birth !== ''){
                 e.preventDefault();
+                console.log(password, firstName, phoneNum, email, birth, rePassword)
                 var myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
 
