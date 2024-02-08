@@ -72,12 +72,11 @@ module.exports = {
   },
   updateUser: (data, callBack) => {
     pool.query(
-      `UPDATE register_users SET firstName=?, lastName=?, userEmail=?, userPassword=?, userPhoneNum=? WHERE userId = ?`,
+      `UPDATE register_users SET firstName=?, lastName=?, userEmail=? , userPhoneNum=? WHERE userId = ?`,
       [
         data.firstName,
         data.lastName,
         data.email,
-        data.password,
         data.phoneNum,
         data.id
       ],

@@ -42,3 +42,21 @@
     flex-direction: column;
     
 }
+
+.profile-submit-btn {
+    border-radius: 20px;
+    height: 30px;
+    text-transform: uppercase;
+
+}
+
+.profile-input {
+    background: transparent;
+    border-radius: 40px;
+}
+
+@media screen and (max-width : 400px) {
+    .profile-input {
+        margin-top: 10px;
+    }
+}

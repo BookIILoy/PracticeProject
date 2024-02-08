@@ -95,7 +95,7 @@ function Register() {
                                 }
                             } else {
                                 MySwal.fire({
-                                    html: <i>Phone Numer is already used.</i>,
+                                    html: <i>{result.data}</i>,
                                     icon : 'error'
                                 })
                             }

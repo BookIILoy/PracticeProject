@@ -13,10 +13,8 @@ function Profile() {
     const [getUser, setGetUser] = useState(false);
     const [editFirstname, setEditFirstname] = useState(false);
     const [editLastname, setEditLastname] = useState(false);
-    const [editPhone, setEditPhone] = useState(false);
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
-    const [phone, setPhone] = useState('');
     const navigate = useNavigate();
     const MySwal = withReactContent(Swal);
     const handleSubmitFirstname = () => {
@@ -25,10 +23,6 @@ function Profile() {
 
     const handleSubmitLastname = () => {
         setEditLastname(!editLastname);
-    }
-
-    const handleSubmitPhone = () => {
-        setEditPhone(!editPhone);
     }
 
     const handleSaveFirstname = () => {
@@ -42,7 +36,6 @@ function Profile() {
         "firstName": userInfo.firstName,
         "lastName": userInfo.lastName,
         "email": userInfo.userEmail,
-        "password": userInfo.userPassword,
         "phoneNum": userInfo.userPhoneNum,
         "id": userInfo.userId
         });
@@ -70,7 +63,6 @@ function Profile() {
         "firstName": firstname,
         "lastName": userInfo.lastName,
         "email": userInfo.userEmail,
-        "password": userInfo.userPassword,
         "phoneNum": userInfo.userPhoneNum,
         "id": userInfo.userId
         });
@@ -103,7 +95,6 @@ function Profile() {
             "firstName": userInfo.firstName,
             "lastName": userInfo.lastName,
             "email": userInfo.userEmail,
-            "password": userInfo.userPassword,
             "phoneNum": userInfo.userPhoneNum,
             "id": userInfo.userId
             });
@@ -131,7 +122,6 @@ function Profile() {
             "firstName": userInfo.firstName,
             "lastName": lastname,
             "email": userInfo.userEmail,
-            "password": userInfo.userPassword,
             "phoneNum": userInfo.userPhoneNum,
             "id": userInfo.userId
             });
@@ -151,67 +141,6 @@ function Profile() {
             .catch(error => console.log('error', error));
             }
         setEditLastname(!editLastname);
-    }
-
-    const handleSavePhone = () => {
-        if(phone === '') {
-            const token = localStorage.getItem('token')
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            myHeaders.append("Authorization", "Bearer " + token);
-    
-            var raw = JSON.stringify({
-            "firstName": userInfo.firstName,
-            "lastName": userInfo.lastName,
-            "email": userInfo.userEmail,
-            "password": userInfo.userPassword,
-            "phoneNum": userInfo.userPhoneNum,
-            "id": userInfo.userId
-            });
-    
-            var requestOptions = {
-            method: 'PATCH',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-            };
-    
-            fetch("http://localhost:5000/api/users", requestOptions)
-            .then(response => response.json())
-            .then(result => {
-                setIsUpdate(!isUpdate);
-            })
-            .catch(error => console.log('error', error));
-            } else {
-            const token = localStorage.getItem('token')
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            myHeaders.append("Authorization", "Bearer " + token);
-    
-            var raw = JSON.stringify({
-            "firstName": userInfo.firstName,
-            "lastName": userInfo.lastName,
-            "email": userInfo.userEmail,
-            "password": userInfo.userPassword,
-            "phoneNum": phone,
-            "id": userInfo.userId
-            });
-    
-            var requestOptions = {
-            method: 'PATCH',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-            };
-    
-            fetch("http://localhost:5000/api/users", requestOptions)
-            .then(response => response.json())
-            .then(result => {
-                setIsUpdate(!isUpdate);
-            })
-            .catch(error => console.log('error', error));
-            }
-        setEditPhone(!editPhone);
     }
 
     const handleSubmitLogout = () => {
@@ -336,18 +265,7 @@ function Profile() {
                                         }
                                         <p> Email : {userInfo.userEmail} 
                                         </p>
-                                        {editPhone ? (
-                                         <p> Phone : <input type="text"
-                                         className="profile-input" placeholder="Phone"
-                                         value={phone}
-                                         onChange={(e) => setPhone(e.target.value)} />
-                                         <button type="submit" className="profile-edit-btn" onClick={handleSavePhone}>Save</button>
-                                        </p>   
-                                        ):
-                                        <p> Phone : {userInfo.userPhoneNum} 
-                                        <button type="submit" className="profile-edit-btn" onClick={handleSubmitPhone}>Edit</button> 
-                                        </p>    
-                                        }
+                                        <p> Phone : {userInfo.userPhoneNum} </p>
                                         <button type="submit" className="profile-submit-btn" onClick={handleSubmitLogout}>Logout</button>
                                     </div>
                                     ) : 

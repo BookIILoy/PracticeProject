@@ -128,11 +128,17 @@ const {
       const body = req.body;
       getUserByUserPhoneNum(body.phoneNum, (err, results) => {
         if(err){
-          console.log(err);
+          console.log(err)
+        }
+        if(!results) {
+          return res.json({
+            success : 0,
+            data: "Invalid Phone Number"
+          })
         }
         return res.json({
-          success: 1,
-          data: results
+          success : 1,
+          data : results
         })
       })
     },
@@ -171,8 +177,6 @@ const {
     },
     updateUsers: (req, res) => {
       const body = req.body;
-      const salt = genSaltSync(10);
-      body.password = hashSync(body.password, salt);
       updateUser(body, (err, results) => {
         if (err) {
           console.log(err);
