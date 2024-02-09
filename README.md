@@ -1,5 +1,7 @@
 # GStore ( My Full Stack Project )
 ## Work In Progess
+-login/register system is ready to use.
+-profile editing is ready to use.
 ### Prerequisite
 - Your system should have docker installed.
 - Your system should have MySQL installed and operating then import "practice_db.sql" to MySQL.
