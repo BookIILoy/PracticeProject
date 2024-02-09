@@ -30,7 +30,7 @@ REACT_APP_BACKEND_IP= localhost:5000
 
 6. Create .env for backend
 ```console
-$touch ./backend/.env
+$ touch ./backend/.env
 ```
 
 7. Edit .env for backend In .env should contain these variables
