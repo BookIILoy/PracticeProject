@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  frontend_server:
+    build: ./frontend/my-app
+    ports:
+      - "3000:3000"
+
+  service_api:
+    build: ./backend
+    # When deploy. It is recommended to not publish any backend(api) port.
+    ports:
+      - "5000:5000"
+
+    # For accessing database on host machine port.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
