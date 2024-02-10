@@ -22,6 +22,22 @@ module.exports = {
       }
     );
   },
+  updateUserImg: (data, callBack) => {
+    pool.query(
+      `UPDATE profile_img SET imgId = ? WHERE userId = ?`,
+      [
+        data.imgId,
+        data.userId
+      ],
+      (error, results, fields) => {
+        if(error) {
+          console.log(error);
+          callBack(error);
+        }
+        return callBack(null, results[0]);
+      }
+    )
+  },
   getUserByUserEmail: (email, callBack) => {
     pool.query(
       `SELECT * FROM register_users WHERE userEmail = ?`,
@@ -57,6 +73,18 @@ module.exports = {
         return callBack(null, results[0]);
       }
     );
+  },
+  getUserImgByUserId: (userId, callBack) => {
+    pool.query(
+      `SELECT * FROM profile_img WHERE userId = ?`,
+      [userId],
+      (error, results, fields) => {
+        if(error) {
+          callBack(error);
+        }
+        return callBack(null, results[0]);
+      }
+    )
   },
   getUsers: callBack => {
     pool.query(

@@ -28,7 +28,7 @@ function Login(){
         redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/api/users/login", requestOptions)
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/login`, requestOptions)
         .then(response => response.json())
         .then(result => {
             if(result.success === 1){
@@ -50,6 +50,7 @@ function Login(){
     const handleSubmitRegister = () => {
         navigate("/register")
     }
+    console.log(process.env.REACT_APP_BACKEND_IP)
     return (
         <>
         <Header />

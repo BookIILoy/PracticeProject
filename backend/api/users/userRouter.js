@@ -7,7 +7,9 @@ const {
     updateUsers,
     deleteUser,
     getUserByUserEmail,
-    getUserByUserPhoneNum
+    getUserByUserPhoneNum,
+    updateUserImg,
+    getUserImgByUserId
   } = require("./userController");
   const { checktoken } = require("../../auth/tokenValidation")
 
@@ -18,6 +20,8 @@ const {
   router.patch("/",checktoken, updateUsers);
   router.delete("/:id",checktoken, deleteUser);
   router.post("/email", getUserByUserEmail);
+  router.patch("/userimg", checktoken, updateUserImg);
+  router.post("/userimg", checktoken, getUserImgByUserId)
   router.post("/phone", getUserByUserPhoneNum);
   router.get("/auth", checktoken, (req, res) => {
     const {userId, firstName, lastName, userEmail, userPhoneNum} = req.user;

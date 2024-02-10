@@ -51,7 +51,7 @@ function Register() {
                         redirect: 'follow'
                         };
 
-                        fetch("http://localhost:5000/api/users/phone", requestOptions)
+                        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/phone`, requestOptions)
                         .then(response => response.json())
                         .then(result => {
                             if(result.success === 0){
@@ -75,7 +75,7 @@ function Register() {
                                     redirect: 'follow'
                                     };
                             
-                                    fetch("http://localhost:5000/api/users", requestOptions)
+                                    fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users`, requestOptions)
                                     .then(response => response.json())
                                     .then(result => {
                                         if(result.success === 1){

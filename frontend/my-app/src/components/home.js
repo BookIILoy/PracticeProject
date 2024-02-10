@@ -19,7 +19,7 @@ function Home () {
         redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/api/users/auth", requestOptions)
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/auth`, requestOptions)
         .then(response => response.json())
         .then(result => {
             if(result.success === 1){

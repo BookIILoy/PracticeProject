@@ -35,6 +35,17 @@
     float: right;
     
 }
+.profileimg-edit-btn {
+    border-radius: 20px;
+    height: 30px;
+    text-transform: uppercase;
+    width: 100px;
+}
+.profileimg-info {
+    display: flex;
+    justify-content: center;
+    
+}
 
 .profile-info {
     width: 100%;
@@ -50,13 +61,83 @@
 
 }
 
+.profile-img img {
+    background: #fff;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #333;
+    border-radius:10px ;
+    display: block;
+    margin: 0 auto;
+}
+
 .profile-input {
     background: transparent;
     border-radius: 40px;
 }
 
+.dropdown {
+    width: 100px;
+    display: block;
+    margin: 20px auto;
+    text-transform: uppercase;
+    position: relative;
+}
+  
+.dropdown .dropdown-btn {
+    padding: 9px;
+    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    cursor: pointer;
+}
+  
+.dropdown .dropdown-content {
+    position: absolute;
+    top: 110%;
+    padding: 9px;
+    background: #fff;
+    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+    width: 200px;
+    color: #333;
+}
+  
+.dropdown .dropdown-content .dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+  
+.dropdown .dropdown-content .dropdown-item:hover {
+    background: #f4f4f4;
+}
+  
+.dropdown .dropdown-span {
+    float: right;
+    font-weight: bold;
+}
+
 @media screen and (max-width : 400px) {
     .profile-input {
         margin-top: 10px;
+    }
+}
+
+@media screen and (min-height : 850px) {
+    .profile-text {
+        margin: 58.5px;
+    }
+}
+
+@media screen and (min-height : 1000px) {
+    .profile-text{
+        margin: 120.5px;
+    }
+}
+
+@media screen and (min-height : 901px) and (min-width : 769px) {
+    .profile-text {
+        margin: 81px;
     }
 }

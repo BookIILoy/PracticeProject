@@ -14,8 +14,6 @@ module.exports = {
                 } else {
                     const decoded = jwt.verify(token, process.env.secretJWT);
                     req.user = decoded;
-                    console.log(decoded)
-                    console.log(err)
                     next();
                 }
             })

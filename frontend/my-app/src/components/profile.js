@@ -4,6 +4,9 @@ import Header from "./header";
 import './profile.css'
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import profile1 from './img/profile1.png'
+import profile2 from './img/profile2.png'
+import profile3 from './img/profile3.png'
 
 function Profile() {
     const [isLogin, setIsLogin] = useState(false);
@@ -15,6 +18,9 @@ function Profile() {
     const [editLastname, setEditLastname] = useState(false);
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
+    const [profileImg, setProfileImg] = useState('');
+    const imgOptions = [1, 2, 3]
+    const [isActive, setIsActive] = useState(false)
     const navigate = useNavigate();
     const MySwal = withReactContent(Swal);
     const handleSubmitFirstname = () => {
@@ -24,7 +30,6 @@ function Profile() {
     const handleSubmitLastname = () => {
         setEditLastname(!editLastname);
     }
-
     const handleSaveFirstname = () => {
         if(firstname === '') {
         const token = localStorage.getItem('token')
@@ -47,7 +52,7 @@ function Profile() {
         redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/api/users", requestOptions)
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users`, requestOptions)
         .then(response => response.json())
         .then(result => {
             setIsUpdate(!isUpdate);
@@ -74,7 +79,7 @@ function Profile() {
         redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/api/users", requestOptions)
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users`, requestOptions)
         .then(response => response.json())
         .then(result => {
             setIsUpdate(!isUpdate);
@@ -106,7 +111,7 @@ function Profile() {
             redirect: 'follow'
             };
     
-            fetch("http://localhost:5000/api/users", requestOptions)
+            fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 setIsUpdate(!isUpdate);
@@ -133,7 +138,7 @@ function Profile() {
             redirect: 'follow'
             };
     
-            fetch("http://localhost:5000/api/users", requestOptions)
+            fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users`, requestOptions)
             .then(response => response.json())
             .then(result => {
                 setIsUpdate(!isUpdate);
@@ -141,6 +146,29 @@ function Profile() {
             .catch(error => console.log('error', error));
             }
         setEditLastname(!editLastname);
+    }
+    const handleSubmitProfileImg = () => {
+        const token = localStorage.getItem('token')
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + token);
+
+        var raw = JSON.stringify({
+        "userId": userInfo.userId,
+        "imgId": profileImg
+        });
+
+        var requestOptions = {
+        method: 'PATCH',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/userimg`, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
     }
 
     const handleSubmitLogout = () => {
@@ -168,10 +196,9 @@ function Profile() {
         redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/api/users/email", requestOptions)
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/email`, requestOptions)
         .then(response => response.json())
         .then(result => {
-            console.log(result);
             setGetUser(getUser);
             setUserInfo(result.data);
             setIsUpdate(!isUpdate)
@@ -190,7 +217,7 @@ function Profile() {
         redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/api/users/auth", requestOptions)
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/auth`, requestOptions)
         .then(response => response.json())
         .then(result => {
             if(result.success === 1){
@@ -210,12 +237,32 @@ function Profile() {
                 redirect: 'follow'
                 };
 
-                fetch("http://localhost:5000/api/users/email", requestOptions)
+                fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/email`, requestOptions)
                 .then(response => response.json())
                 .then(result => {
-                    console.log(result);
                     setGetUser(!getUser);
                     setUserInfo(result.data);
+                    var myHeaders = new Headers();
+                    myHeaders.append("Content-Type", "application/json");
+                    myHeaders.append("Authorization", "Bearer " + token);
+    
+                    var raw = JSON.stringify({
+                    "userId": result.data.userId
+                    });
+    
+                    var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                    };
+    
+                    fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/userimg`, requestOptions)
+                    .then(response => response.json())
+                    .then(result => {
+                        setProfileImg(result.data.imgId);
+                    })
+                    .catch(error => console.log('error', error));
                 })
                 .catch(error => console.log('error', error));
             }
@@ -223,7 +270,7 @@ function Profile() {
                 navigate('/login')
             }
         })
-        .catch(error => navigate('/login'));
+        .catch(error => console.log(error));
     },[])
 
     if(isLogin) {
@@ -233,6 +280,82 @@ function Profile() {
                 <div className="container">
                     <div className="profile-con">
                         <div className="profile-text">
+                        {
+                            profileImg == 1 ? (
+                                <div className="profile-img">
+                                <img src={profile1} alt="" />
+                                <div className="dropdown">
+                                    <div className="dropdown-btn" onClick={(e) =>
+                                    setIsActive(!isActive)}>
+                                    {profileImg}
+                                    </div>
+                                    {isActive && (
+                                    <div className="dropdown-content">
+                                        { imgOptions.map((imgOptions) =>
+                                        <div
+                                            onClick={(e) => {
+                                            setProfileImg(imgOptions);
+                                            setIsActive(false);
+                                            }}
+                                            className="dropdown-item">
+                                            {imgOptions}
+                                        </div>
+                                        )}
+                                    </div>
+                                    )}
+                                </div>
+                                </div>
+                            ) :
+                             profileImg == 2 ? (
+                                <div className="profile-img">
+                                <img src={profile2} alt="" />
+                                <div className="dropdown">
+                                    <div className="dropdown-btn" onClick={(e) =>
+                                    setIsActive(!isActive)}>
+                                    {profileImg}
+                                    </div>
+                                    {isActive && (
+                                    <div className="dropdown-content">
+                                        { imgOptions.map((imgOptions) =>
+                                        <div
+                                            onClick={(e) => {
+                                            setProfileImg(imgOptions);
+                                            setIsActive(false);
+                                            }}
+                                            className="dropdown-item">
+                                            {imgOptions}
+                                        </div>
+                                        )}
+                                    </div>
+                                    )}
+                                </div>
+                                </div>
+                            ) :
+                            <div className="profile-img">
+                            <img src={profile3} alt="" />
+                            <div className="dropdown">
+                                <div className="dropdown-btn" onClick={(e) =>
+                                setIsActive(!isActive)}>
+                                {profileImg}
+                                </div>
+                                {isActive && (
+                                <div className="dropdown-content">
+                                    { imgOptions.map((imgOptions) =>
+                                    <div
+                                        onClick={(e) => {
+                                        setProfileImg(imgOptions);
+                                        setIsActive(false);
+                                        }}
+                                        className="dropdown-item">
+                                        {imgOptions}
+                                    </div>
+                                    )}
+                                </div>
+                                )}
+                            </div>
+                            </div>   
+                        }
+                        <div className="profileimg-info"><button type="submit" className="profileimg-edit-btn" onClick={handleSubmitProfileImg}>save</button></div>
                             <h1>Profile</h1>
                             <div className="profile-info">
                                 { getUser ? ( 

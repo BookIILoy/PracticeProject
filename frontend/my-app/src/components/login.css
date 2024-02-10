@@ -132,4 +132,28 @@
     }
 }
 
+@media screen and (min-height : 901px)  {
+    .login-text {
+        margin: 138.5px;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 30px 40px;
+        backdrop-filter: blur(5px);
+        text-align: center;
+        color: #fff;
+    }
+    
+}
+
+@media screen and (min-height : 901px) and (min-width : 769px) {
+    .login-text {
+        margin: 99px;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 30px 40px;
+        backdrop-filter: blur(5px);
+        text-align: center;
+        color: #fff;
+    }
+}
 

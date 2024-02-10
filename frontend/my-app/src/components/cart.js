@@ -17,7 +17,7 @@ function Cart(){
         redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/api/users/auth", requestOptions)
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/auth`, requestOptions)
         .then(response => response.json())
         .then(result => {
             if(result.success === 1){
@@ -34,7 +34,7 @@ function Cart(){
     return (
         <>
             <Header user={user} isLogin={isLogin}/>
-            <h1>Cart</h1>
+            <h1>Cart Gay</h1>
         </>
     )
 }

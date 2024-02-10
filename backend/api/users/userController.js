@@ -5,7 +5,9 @@ const {
     getUsers,
     updateUser,
     deleteUser,
-    getUserByUserPhoneNum
+    getUserByUserPhoneNum,
+    updateUserImg,
+    getUserImgByUserId
   } = require("./userService");
   const { hashSync, genSaltSync } = require("bcrypt");
   const bcrypt = require("bcrypt");
@@ -74,37 +76,6 @@ const {
         }
       });
     },
-    /*login: (req, res) => {
-      const body = req.body;
-      getUserByUserEmail(body.email, (err, results) => {
-        if (err) {
-          console.log(err);
-        }
-        if (!results) {
-          return res.json({
-            success: 0,
-            data: "Invalid email or password"
-          });
-        }
-        const result = compareSync(body.password, results.password);
-        if (result) {
-          results.password = undefined;
-          const jsontoken = sign({ result: results }, "qwe1234", {
-            expiresIn: "1h"
-          });
-          return res.json({
-            success: 1,
-            message: "login successfully",
-            token: jsontoken
-          });
-        } else {
-          return res.json({
-            success: 0,
-            data: "Invalid email or password"
-          });
-        }
-      });
-    },*/
     getUserByUserEmail: (req,res) => {
       const body = req.body
       getUserByUserEmail(body.email, (err, results) => {
@@ -163,6 +134,25 @@ const {
         });
       });
     },
+    getUserImgByUserId: (req, res) => {
+      const body = req.body;
+      getUserImgByUserId(body.userId, (err, results) => {
+        if(err){
+          console.log(err);
+          return;
+        }
+        if(!results){
+          return res.json({
+            success: 0,
+            message: "User not found"
+          })
+        }
+        return res.json({
+          success: 1,
+          data: results
+        })
+      })
+    },
     getUsers: (req, res) => {
       getUsers((err, results) => {
         if (err) {
@@ -177,15 +167,56 @@ const {
     },
     updateUsers: (req, res) => {
       const body = req.body;
-      updateUser(body, (err, results) => {
+      getUserByUserId(body.id, (err, results) => {
         if (err) {
           console.log(err);
           return;
         }
-        return res.json({
-          success: 1,
-          message: "updated successfully"
-        });
+        if (!results) {
+          return res.json({
+            success: 0,
+            message: "Record not Found"
+          });
+        }
+        if(results){
+          updateUser(body, (err, results) => {
+            if (err) {
+              console.log(err);
+              return;
+            }
+            return res.json({
+              success: 1,
+              message: "updated successfully"
+            });
+          });
+        }
+      });
+    },
+    updateUserImg: (req, res) => {
+      const body = req.body;
+      getUserByUserId(body.userId, (err, results) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        if (!results) {
+          return res.json({
+            success: 0,
+            message: "Record not Found"
+          });
+        }
+        if(results){
+          updateUserImg(body, (err, results) => {
+            if (err) {
+              console.log(err);
+              return;
+            }
+            return res.json({
+              success: 1,
+              message: "updated successfully"
+            });
+          });
+        }
       });
     },
     deleteUser: (req, res) => {
