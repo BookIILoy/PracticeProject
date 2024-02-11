@@ -62,4 +62,21 @@ CORS_ORIGIN = http://localhost:3000
 ```console
 $ docker compose up
 ```
+#### For Adding Product ( In this time )
+- use  /api/admin/upload like post method in postman (any platform that you use to test APIs) to upload image to backend and copy image_url
+Example
+![Screenshot 2024-02-12 004931](https://github.com/BookIILoy/PracticeProject/assets/145659447/bfa62049-ac07-492c-b8cb-15d9d8d187d8)
+- Go to /api/admin/createproduct to adding your product to your database.
+Example
+```console
+{
+    "name" : your_product_name,
+    "oldPrice" : your_old_price,
+    "newPrice" : your_new_price,
+    "count" : your_product_count,
+    "desc" : your_product_description,
+    "img" : your_product_image_url ( just paste image_url that you get from /api/admin/upload
+}
+```
+![Screenshot 2024-02-12 015745](https://github.com/BookIILoy/PracticeProject/assets/145659447/e7c31620-47d4-4e8a-b3a9-9b4862dadcd5)
 ps. This guide is for testing on localhost only.
