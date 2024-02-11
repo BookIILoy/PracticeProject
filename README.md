@@ -65,6 +65,7 @@ $ docker compose up
 #### For Adding Product ( In this time )
 - use  /api/admin/upload like post method in postman (any platform that you use to test APIs) to upload image to backend and copy image_url
 Example
+###### key must be img and value is for upload image file.
 ![Screenshot 2024-02-12 004931](https://github.com/BookIILoy/PracticeProject/assets/145659447/bfa62049-ac07-492c-b8cb-15d9d8d187d8)
 - Go to /api/admin/createproduct to adding your product to your database.
 Example
