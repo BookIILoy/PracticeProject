@@ -33,7 +33,7 @@ function Header({user, isLogin}) {
                             <Link to = '/Shop' onSubmit={handleSubmitShop}>Shop</Link>
                         </li>
                         <li className="menu-link" onClick={closeMobileMenu}>
-                            <Link to = '/cart' onSubmit={handleSubmitCart}>Cart</Link>
+                            <Link to = '/cart' onSubmit={handleSubmitCart}>Cart<div className="header-cart-count">0</div></Link>
                         </li> 
                         <li className="menu-link" onClick={closeMobileMenu}>
                             {isLogin ? (

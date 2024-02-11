@@ -16,12 +16,14 @@
     align-items: center;
 }
 
+
 .logo-container a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
     font-size: 1.43rem;
 }
+
 
 .menu {
     display: flex;
@@ -46,6 +48,19 @@
 .header-profile {
     color: #fff;
 }
+.header-cart-count {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -35px;
+    margin-left: 45px;
+    border-radius: 11px;
+    font-size: 14px;
+    background: white;
+    color: rgb(0, 0, 0);
+}
 
 @media screen and (max-width: 1080px){
     .mobile-menu {
@@ -55,6 +70,9 @@
     }
     .header {
         padding: 0 1.5rem;
+    }
+    .header-cart-count{
+        margin-left: 25px;
     }
     .menu {
         width: 100%;
@@ -86,4 +104,11 @@
         height: 10vm;
         padding: 10px 0;
     }
+}
+
+@media screen and (min-width : 1081px) {
+    .header-con a {
+        margin-left: 20px;
+    }
+    
 }

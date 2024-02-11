@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import Header from "./header";
+import './shop.css'
 import { useNavigate } from "react-router-dom";
+import ShopItem from "./shopitem";
 
-function Cart(){
+function Shop() {
     const navigate = useNavigate();
     const [user, setUser] = useState([]);
     const [isLogin, setIsLogin] = useState(false);
@@ -31,12 +33,12 @@ function Cart(){
         .catch(error => console.log(error));
     },[])
 
-    return (
+    return(
         <>
             <Header user={user} isLogin={isLogin}/>
-            <h1>Cart Gay</h1>
+            <ShopItem />
         </>
     )
 }
 
-export default Cart
+export default Shop;
