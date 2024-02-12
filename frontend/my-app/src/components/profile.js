@@ -90,7 +90,7 @@ function Profile() {
     }
 
     const handleSaveLastname = () => {
-        if(lastname === '') {
+        if(lastname === '') { // if lastname input = null it will send default data to the database.
             const token = localStorage.getItem('token')
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -181,7 +181,7 @@ function Profile() {
         })
     }
 
-    if(isUpdate){
+    if(isUpdate){ //when user update their profile it will turn isUpdate from false to true and fetch new detail from database to the page.
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -217,7 +217,7 @@ function Profile() {
         redirect: 'follow'
         };
 
-        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/auth`, requestOptions)
+        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/auth`, requestOptions) //to check that token is valid or not
         .then(response => response.json())
         .then(result => {
             if(result.success === 1){
@@ -237,7 +237,7 @@ function Profile() {
                 redirect: 'follow'
                 };
 
-                fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/email`, requestOptions)
+                fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/email`, requestOptions) //to get user detail by user email
                 .then(response => response.json())
                 .then(result => {
                     setGetUser(!getUser);
@@ -257,7 +257,7 @@ function Profile() {
                     redirect: 'follow'
                     };
     
-                    fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/userimg`, requestOptions)
+                    fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/userimg`, requestOptions) //to get user profile in database
                     .then(response => response.json())
                     .then(result => {
                         setProfileImg(result.data.imgId);

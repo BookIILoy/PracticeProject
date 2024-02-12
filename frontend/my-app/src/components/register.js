@@ -16,6 +16,7 @@ function Register() {
     const [birth, setBirth] = useState('');
     const MySwal = withReactContent(Swal);
     const handleSubmitRegister = (e) => {
+            //use to check that is user miss some inputs if user missing only one input or more it will error and not try to fetch.
             if( phoneNum && firstName && lastName && email && password && rePassword && birth !== ''){
                 e.preventDefault();
                 console.log(password, firstName, phoneNum, email, birth, rePassword)
@@ -33,10 +34,10 @@ function Register() {
                 redirect: 'follow'
                 };
         
-                fetch("http://localhost:5000/api/users/email", requestOptions)
+                fetch("http://localhost:5000/api/users/email", requestOptions) //fetch to check that email that user use is a same one in database or not
                 .then(response => response.json())
                 .then(result => {
-                    if(result.success === 0){
+                    if(result.success === 0){ //if it not it will return success = 0 and fetch next api
                         var myHeaders = new Headers();
                         myHeaders.append("Content-Type", "application/json");
 
@@ -51,11 +52,11 @@ function Register() {
                         redirect: 'follow'
                         };
 
-                        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/phone`, requestOptions)
+                        fetch(`http://${process.env.REACT_APP_BACKEND_IP}/api/users/phone`, requestOptions) //to check phone that user use is a same one in database or not
                         .then(response => response.json())
                         .then(result => {
-                            if(result.success === 0){
-                                if(password === rePassword){
+                            if(result.success === 0){ // if not will create user
+                                if(password === rePassword){ //check password is equal to repassword
                                     var myHeaders = new Headers();
                                     myHeaders.append("Content-Type", "application/json");
                             
