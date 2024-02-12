@@ -7,13 +7,12 @@ function ProductDisplay(props) {
     const imgUrl = process.env.REACT_APP_BACKEND_IP;
     const {product} = props;
     const [cartItems, setCartItems] = useState([]);
-    const [isCart, setIsCart] = useState(false);
+    localStorage.setItem('cartItems', JSON.stringify(cartItems))
     const handleAddToCart = (product) => {
         setCartItems([...cartItems, product]);
     }
     const handleSubmitCart = () => {
-        setIsCart(!isCart);
-        navigate('/cart', {replace: true, state:{cartItems,isCart}})
+        navigate('/cart')
     }
     return(
         <div className="productdisplay-con">

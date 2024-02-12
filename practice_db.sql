@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2024 at 06:14 PM
+-- Generation Time: Feb 12, 2024 at 02:48 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `practice_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_detail`
+--
+
+CREATE TABLE `order_detail` (
+  `id` int(11) NOT NULL,
+  `orderId` int(11) NOT NULL,
+  `productId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `unitPrice` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -114,11 +129,48 @@ INSERT INTO `register_users` (`userId`, `firstName`, `lastName`, `userEmail`, `u
 (32, 'Tester', 'Register ', 'registertest@mail.com', '826249900', '$2b$10$rNWM7iB5s9nBw830cGMNKOV8D/CxzaZPA1ce8UO0fuXOnekts983i', '2024-02-01'),
 (35, 'Gaypoon', 'TestLast1', 'backendtest@mail.com', '0818667784', '$2b$10$qiDoxysTFN4tG1iezWI/VOBI0KeESRUiA33GnLSAoCC79jHE93mHe', '2003-02-02'),
 (37, 'Hellotestdocker', 'subimg', 'ttw2@mail.com', '0818667755', '$2b$10$TSC8ee/wpZChQEgo2rL5LuKTsbQWa0ZeEr2bNBVkuG6qiiNBSMTXe', '2024-01-02'),
-(38, 'ttewt', 'trrtrr', 'tytytt@mail.com', '0826248868', '$2b$10$c.73YsXlBcVvxZgDvxn7Yey444kAAM4anO4FajXTLEauxbVmU7G52', '2002-02-01');
+(38, 'ttewt', 'trrtrr', 'tytytt@mail.com', '0826248868', '$2b$10$c.73YsXlBcVvxZgDvxn7Yey444kAAM4anO4FajXTLEauxbVmU7G52', '2002-02-01'),
+(39, 'Testnewtable', 'Newtable', 'newtable@mail.com', '0992218844', '$2b$10$UP3PNk4VzytKjd5i2VzHVuVSf10Cus72.7KaXFhu9yoxWYqPT9CaC', '2003-02-21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_detail`
+--
+
+CREATE TABLE `users_detail` (
+  `userAddress` varchar(255) DEFAULT NULL,
+  `userId` int(11) NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `userEmail` varchar(255) NOT NULL,
+  `userPhoneNum` varchar(64) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_order`
+--
+
+CREATE TABLE `user_order` (
+  `orderId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `userEmail` varchar(255) NOT NULL,
+  `totalPrice` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `order_detail`
+--
+ALTER TABLE `order_detail`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orderId` (`orderId`),
+  ADD KEY `productId` (`productId`),
+  ADD KEY `userId` (`userId`);
 
 --
 -- Indexes for table `product_data`
@@ -141,8 +193,29 @@ ALTER TABLE `register_users`
   ADD UNIQUE KEY `userPhoneNum` (`userPhoneNum`);
 
 --
+-- Indexes for table `users_detail`
+--
+ALTER TABLE `users_detail`
+  ADD PRIMARY KEY (`userId`),
+  ADD UNIQUE KEY `userEmail` (`userEmail`),
+  ADD UNIQUE KEY `userPhoneNum` (`userPhoneNum`);
+
+--
+-- Indexes for table `user_order`
+--
+ALTER TABLE `user_order`
+  ADD PRIMARY KEY (`orderId`),
+  ADD KEY `userId` (`userId`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `order_detail`
+--
+ALTER TABLE `order_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product_data`
@@ -154,17 +227,43 @@ ALTER TABLE `product_data`
 -- AUTO_INCREMENT for table `register_users`
 --
 ALTER TABLE `register_users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `user_order`
+--
+ALTER TABLE `user_order`
+  MODIFY `orderId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `order_detail`
+--
+ALTER TABLE `order_detail`
+  ADD CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`orderId`) REFERENCES `user_order` (`orderId`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `product_data` (`productId`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_detail_ibfk_3` FOREIGN KEY (`userId`) REFERENCES `register_users` (`userId`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `profile_img`
 --
 ALTER TABLE `profile_img`
   ADD CONSTRAINT `fk_userId` FOREIGN KEY (`userId`) REFERENCES `register_users` (`userId`);
+
+--
+-- Constraints for table `users_detail`
+--
+ALTER TABLE `users_detail`
+  ADD CONSTRAINT `users_detail_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `register_users` (`userId`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `user_order`
+--
+ALTER TABLE `user_order`
+  ADD CONSTRAINT `user_order_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users_detail` (`userId`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

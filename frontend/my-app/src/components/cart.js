@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Header from "./header";
 import Item from "./product";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Cart(){
     const navigate = useNavigate();
-    const location = useLocation();
-    const isCart = false;
     const [user, setUser] = useState([]);
     const [isLogin, setIsLogin] = useState(false);
+    const cartItems = localStorage.getItem('cartItems');
+    const arrayCartItem = JSON.parse(cartItems);
+    console.log(arrayCartItem)
     const imgUrl = process.env.REACT_APP_BACKEND_IP;
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -34,22 +35,25 @@ function Cart(){
         })
         .catch(error => console.log(error));
     },[])
-    if(isCart){
-        const product = location.state.cartItems;
+    const handleSubmitShop = () => {
+        navigate('/shop');
+    }
         return (
             <>
                 <Header user={user} isLogin={isLogin}/>
                 <h1>Cart</h1>
                 <div className="cart-con">
-                    { product.map((item, id) => (
-                        <Item key = {id} id={item.productId} name = {item.productName} image = {`http://${imgUrl}/api/admin/images/${item.productImg}`} new_price = {item.productNewPrice} old_price = {item.productOldPrice} />
-                    ))
+                    { arrayCartItem !== null ? arrayCartItem.map((item, id) => (
+                            <Item key = {id} id={item.productId} name = {item.productName} image = {`http://${imgUrl}/api/admin/images/${item.productImg}`} new_price = {item.productNewPrice} old_price = {item.productOldPrice} />
+                        )) : (
+                            <div className="cart-text">
+                                <h1>Your Cart is Empty.</h1>
+                                <button onClick={handleSubmitShop}>Our Shop</button>
+                            </div>
+                        )
                     }
                 </div>
             </>
     )
-    }else {
-        return <h1>Loading...</h1>
-    }
 } 
 export default Cart
