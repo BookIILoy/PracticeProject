@@ -23,7 +23,7 @@ function CartItems(props) {
     };
 
     return(
-        <div className="cartitems-con">
+            <div className="cartitems-con">
             <Link to={`/product/${props.id}`}><img src={props.image} alt="" /></Link>
             <p>{props.name}</p>
             <div className="cartitems-prices">

@@ -1,0 +1,123 @@
+.payment-con{
+    margin: 0 auto;
+    width : 850px;
+}
+
+.payment-text{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin : 10px 0;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+.payment-price {
+    display: flex;
+}
+
+.payment-price p {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.payment-price span {
+    margin: 16px;
+}
+
+.payment-input {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.payment-input-add p{
+    margin: 6px;
+}
+
+.payment-input-add input {
+    margin-bottom: 10px;
+    width: 356px;
+    height: 50px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    outline: none;
+}
+
+.payment-input p {
+    margin: 6px;
+}
+
+.payment-input input {
+    border: 2px solid gray;
+    outline: none;
+    border-radius: 5px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.payment-product {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 650px;
+    float: left;
+    justify-items: center;
+}
+
+.payment-product p {
+    font-weight: 700;
+}
+
+.payment-product span {
+    margin: 16px;
+}
+
+.payment-input-payment {
+    display: flex;
+}
+
+.payment-input-payment span {
+    margin: 16px;
+}
+
+.payment-input-payment p {
+    font-weight: 700;
+}
+
+@media screen and (max-width : 400px) {
+    .payment-con{
+        width : 300px;
+    }
+
+    .payment-product {
+        width: 260px;
+    }
+    .payment-input {
+        display: flex;
+        flex-direction: column;
+        width: 260px;
+        float: left;
+        justify-items: center;
+    }
+    .payment-input-add input {
+        width: 252px;
+    }
+    .payment-input-payment span {
+        text-align: center;
+        margin: 16px 0px;
+    }
+    .payment-input-payment {
+        display: flex;
+        flex-direction: column;
+    }
+    .payment-input-payment p {
+        text-align: center;
+    }
+}
+
+@media screen and (min-width : 401px) and (max-width : 800px){
+    .payment-con{
+        width : 650px;
+    }
+}

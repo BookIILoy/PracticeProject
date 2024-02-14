@@ -9,6 +9,7 @@ import { Route, Routes } from "react-router-dom"
 import Profile from "./components/profile";
 import Shop from "./components/shop";
 import Product from "./components/productdetail";
+import Payment from "./components/payment";
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/product" element = {<Product />}>
           <Route path=":productId" element = {<Product />} />
           </Route>
+          <Route path="/payment" element = {<Payment />} />
 
       </Routes>
       <Footer />

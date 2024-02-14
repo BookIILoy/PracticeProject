@@ -8,6 +8,8 @@ function Header({user, isLogin}) {
     const [click, setClick] = useState(false)
     const handleClick = () => setClick(!click)
     const closeMobileMenu = () => setClick(false)
+    const cartItems = localStorage.getItem('cartItems');
+    const arrayCartItem = JSON.parse(cartItems);
     const navigate = useNavigate();
     const handleSubmitCart = () => {
         navigate('/cart')
@@ -33,7 +35,7 @@ function Header({user, isLogin}) {
                             <Link to = '/Shop' onSubmit={handleSubmitShop}>Shop</Link>
                         </li>
                         <li className="menu-link" onClick={closeMobileMenu}>
-                            <Link to = '/cart' onSubmit={handleSubmitCart}>Cart<div className="header-cart-count">0</div></Link>
+                            <Link to = '/cart' onSubmit={handleSubmitCart}>Cart<div className="header-cart-count">{arrayCartItem !== null ? ((arrayCartItem.length) ): (<p>0</p>)}</div></Link>
                         </li> 
                         <li className="menu-link" onClick={closeMobileMenu}>
                             {isLogin ? (

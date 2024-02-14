@@ -15,7 +15,9 @@ function Cart(){
         const totalPrice = item.reduce((sum, item) => sum + item.productNewPrice, 0);
         return totalPrice;
     }
-    
+    const handlePayment = (totalPrice) => {
+       navigate('/payment', {replace: true, state:{arrayCartItem, totalPrice}});
+    }
     useEffect(() => {
         const token = localStorage.getItem('token')
         var myHeaders = new Headers();
@@ -49,9 +51,14 @@ function Cart(){
                 <div className="cart-con">
                     <h1>Cart</h1>
                     { arrayCartItem.length !== 0 ? 
-                    arrayCartItem?.map((item, id) => (
+                    <div className="cart-text">
+                        { arrayCartItem?.map((item, id) => (
                             <CartItems key = {id} id={item.productId} name = {item.productName} image = {`http://${imgUrl}/api/admin/images/${item.productImg}`} new_price = {item.productNewPrice} totalPrice = {calculateTotalPrice(arrayCartItem)} />
-                        )) 
+                        )) }
+                        <div className="cart-button">
+                            <button onClick={() => {handlePayment(calculateTotalPrice(arrayCartItem))}}>Payment</button>
+                        </div>
+                    </div>
                         : (
                             <div className="cart-text">
                                 <h1>Your Cart is Empty.</h1>
