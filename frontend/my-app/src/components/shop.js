@@ -36,7 +36,9 @@ function Shop() {
     return(
         <>
             <Header user={user} isLogin={isLogin}/>
-            <ShopItem /> {/*call ShopItem function to show all product. */}
+            <div className="shop-con">
+                <ShopItem /> {/*call ShopItem function to show all product. */}
+            </div>
         </>
     )
 }

@@ -50,7 +50,7 @@ function Cart(){
                 <Header user={user} isLogin={isLogin}/>
                 <div className="cart-con">
                     <h1>Cart</h1>
-                    { arrayCartItem.length !== 0 ? 
+                    { arrayCartItem?.length !== 0 ? 
                     <div className="cart-text">
                         { arrayCartItem?.map((item, id) => (
                             <CartItems key = {id} id={item.productId} name = {item.productName} image = {`http://${imgUrl}/api/admin/images/${item.productImg}`} new_price = {item.productNewPrice} totalPrice = {calculateTotalPrice(arrayCartItem)} />

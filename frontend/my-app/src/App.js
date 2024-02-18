@@ -10,9 +10,10 @@ import Profile from "./components/profile";
 import Shop from "./components/shop";
 import Product from "./components/productdetail";
 import Payment from "./components/payment";
+import './App.css'
 function App() {
   return (
-    <>
+    <div className="app-body">
       <Routes>
           <Route path="/" element = {<Home />} />
           <Route path="/about" element = {<About />} />
@@ -28,7 +29,7 @@ function App() {
 
       </Routes>
       <Footer />
-    </>
+    </div>
   );
 }
 
